@@ -1,3 +1,4 @@
+import type { AuthenticatedRequest } from "./middleware.js";
 import { User } from "./model.js";
 import tryCatch from "./trycatch.js";
 import bcrypt from "bcrypt"
@@ -66,4 +67,10 @@ export const loginUser = tryCatch(async (req, res) => {
         user,
         token
     })
+})
+
+export const myProfile = tryCatch(async (req:AuthenticatedRequest, res) => {
+    const user = req.user
+
+    res.status(200).json(user)
 })
